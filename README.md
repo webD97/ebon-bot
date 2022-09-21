@@ -1,5 +1,7 @@
 # eBon Bot
-Let's just call it _ebb_.
+Let's just call it _ebb_ - it's simpler. _ebb_ is a personal tool that connect to my mailbox, watches an inbox for REWE eBon mails, downloads the eBon PDF file from the attachment, parses it using [rewe-ebon-parser](https://github.com/webD97/rewe-ebon-parser), dumps the PDF file and the generated JSON file into my Nextcloud and sends me a summary of my purchase via a Telegram bot.
+
+Does too many things in one package and is probably not useful for anyone else but it might still be interesting to the public. So here we go :)
 
 ## Usage
 ```sh

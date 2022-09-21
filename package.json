@@ -16,7 +16,7 @@
     "package": "npm run build && npx pkg --no-bytecode --public-packages '*' --compress GZip ."
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/imap-simple": "^4.2.2",
     "@types/node": "^16.0.0",
