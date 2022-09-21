@@ -1,4 +1,6 @@
+ARG file
+
 FROM scratch
-COPY pkg/ebon-bot-x64 /ebb
+COPY pkg/$file /ebb
 USER 1000
 CMD ["/ebb"]
