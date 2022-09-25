@@ -40,7 +40,7 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            webd97/ebon-bot
+            ghcr.io/webd97/ebon-bot
           tags: |
             type=schedule
             type=ref,event=branch
