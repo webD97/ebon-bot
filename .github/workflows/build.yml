@@ -36,7 +36,7 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            <specify the image name>
+            webd97/ebon-bot
           tags: |
             type=schedule
             type=ref,event=branch
