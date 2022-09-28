@@ -148,9 +148,9 @@ async function main() {
 
     const telegramClient = new TelegramClient(new StringSession(""), telegramConfig.apiId, telegramConfig.apiHash, { connectionRetries: 10 });
     telegramClient.setLogLevel(LogLevel.WARN);
-    await telegramClient.start({ botAuthToken: telegramConfig.botToken });
 
     const notify = async (title: string, message: string) => {
+        await telegramClient.start({ botAuthToken: telegramConfig.botToken });
         await telegramClient.sendMessage(telegramConfig.peer, {
             message: `**${title}**\n\n${message}`
         });
