@@ -65,7 +65,7 @@ async function handleMails(imap: imapSimple.ImapSimple, folder: Folder, notify: 
                 const formattedRevenue = EURO_FORMAT.format(eBon.payback.qualifiedRevenue)
 
                 notificationBody.push('');
-                notificationBody.push(`Du hast ${payback} PayBack Punkte auf einen Umsatz von ${paybackUmsatz}€ erhalten und dabei ${coupons} Coupons eingelöst.`);
+                notificationBody.push(`Du hast ${payback} PayBack Punkte auf einen Umsatz von ${formattedRevenue} erhalten und dabei ${coupons} Coupons eingelöst.`);
 
                 if (eBon.payback.usedCoupons.length > 0) {
                     const couponInfo = eBon.payback.usedCoupons.map(coupon => `${coupon.name} (${coupon.points})`).join(', ');
