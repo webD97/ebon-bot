@@ -7,6 +7,8 @@ import { TelegramClient } from "telegram";
 import { StringSession } from "telegram/sessions";
 import { LogLevel } from "telegram/extensions/Logger";
 
+const EURO_FORMAT = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+
 async function handleMessage(imap: imapSimple.ImapSimple, message: imapSimple.Message, folder: Folder) {
     logger.info(`Searching eBon attachment in message received at ${message.attributes.date.toISOString()}.`);
     const attachmentPart = imapSimple.getParts(message.attributes.struct!)
@@ -45,7 +47,6 @@ async function handleMails(imap: imapSimple.ImapSimple, folder: Folder, notify: 
         eBons.forEach(eBon => {
             const datum = eBon.date.toLocaleDateString('de-DE');
             const zeit = eBon.date.toLocaleTimeString('de-DE');
-            const betrag = eBon.total.toString().replace('.', ',');
 
             const artikel = eBon.items
                 .filter(item => item.subTotal > 0)
@@ -53,15 +54,15 @@ async function handleMails(imap: imapSimple.ImapSimple, folder: Folder, notify: 
                 .map(item => item.name)
                 .join(', ');
 
-            const notificationTitle = `Dein eBon für den Einkauf am ${datum} um ${zeit} (${betrag}€)`;
+            const notificationTitle = `Dein eBon für den Einkauf am ${datum} um ${zeit} (${EURO_FORMAT.format(eBon.total)})`;
             const notificationBody = [
                 `Folgende Artikel hast du gekauft: ${artikel}`
             ];
 
             if (eBon.payback !== undefined) {
                 const payback = eBon.payback.earnedPoints;
-                const paybackUmsatz = eBon.payback.qualifiedRevenue.toString().replace('.', ',');
                 const coupons = eBon.payback.usedCoupons.length;
+                const formattedRevenue = EURO_FORMAT.format(eBon.payback.qualifiedRevenue)
 
                 notificationBody.push('');
                 notificationBody.push(`Du hast ${payback} PayBack Punkte auf einen Umsatz von ${paybackUmsatz}€ erhalten und dabei ${coupons} Coupons eingelöst.`);
